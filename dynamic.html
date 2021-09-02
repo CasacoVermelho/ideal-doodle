@@ -4,6 +4,8 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Dynamic Tee Designer</title>
+        <!-- Include DomToImage in the page -->
+		<script type="text/javascript" src="js/domtoimage.min.js"></script>
 		<script type="text/javascript" src="js/fabric.min.js"></script>
 		<!-- <script type="text/javascript" src="js/static.js"></script> -->
 		<link rel="stylesheet" href="css/dynamic.css">
@@ -122,6 +124,23 @@
 			        canvas.remove(canvas.getActiveObject());
 			    }
 			}, false);
+
+
+			// ----------------------------------------------------------------------------
+			// Define as node the T-Shirt Div
+			var node = document.getElementById('tshirt-div');
+
+			domtoimage.toPng(node).then(function (dataUrl) {
+			    // Print the data URL of the picture in the Console
+			    console.log(dataUrl);
+
+			    // You can for example to test, add the image at the end of the document
+			    var img = new Image();
+			    img.src = dataUrl;
+			    document.body.appendChild(img);
+			}).catch(function (error) {
+			    console.error('oops, something went wrong!', error);
+			});
         </script>
 		</div>
 	</body>
